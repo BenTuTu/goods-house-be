@@ -1,15 +1,14 @@
 const router = require('koa-router')()
-const songsModal = require('./controller')
+const HomeCon = require('./controller')
 
-router.get('/', async (ctx, next) => {
-  await ctx.render('index', {
-    title: 'Hello Koa 2!'
-  })
-})
+// router.get('/', async (ctx, next) => {
+//   await ctx.render('index', {
+//     title: 'Hello Koa 2!'
+//   })
+// })
 
 router.get('/home', async (ctx, next) => {
-  console.log(111)
-  ctx.body = await songsModal.query()
+  ctx.body = await HomeCon.query()
 })
 
 router.get('/json', async (ctx, next) => {

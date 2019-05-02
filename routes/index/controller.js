@@ -1,6 +1,6 @@
 const MyModal = require('./modal')
 
-class SongsController {
+class HomeController {
     constructor() {
   
     }
@@ -17,6 +17,6 @@ class SongsController {
     }
 }
   
-const songsModal = new SongsController();
+const HomeCon = new HomeController();
 
-module.exports = songsModal;
+module.exports = HomeCon;

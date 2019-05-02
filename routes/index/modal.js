@@ -2,11 +2,11 @@ const mongoose = require('../../public/javascripts/db.js')
 
 const Schema = mongoose.Schema
 
-const musicSchema = new Schema({
+const homeSchema = new Schema({
   "name" : Number,
   "sex" : String,
 },{ collection: "homeData"})
 
-const MyModal = mongoose.model('homeData', musicSchema);
+const MyModal = mongoose.model('homeData', homeSchema);
 
 module.exports = MyModal;
