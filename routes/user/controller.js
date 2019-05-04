@@ -5,14 +5,58 @@ class SongsController {
 
   }
 
-  login() {
+  login(data) {
     return new Promise((res, rej) => {
       UserModal.find({}, (err, fulfil) => {
+        let msg = '';
+        let isExist = false;
+        let resData = {};
+
         if (err) {
           rej(err)
         }
-        res(fulfil)
-      })
+        console.log(fulfil);
+        
+        // 判断账号和密码是否正确
+        fulfil.forEach(item => {
+          if (item.userName === data.userName && item.password === data.password) {
+            isExist = true;
+          }
+          
+        });
+        
+        // 去除密码返回给前端
+
+        if (isExist) {
+          msg = '恭喜登录成功^_^';
+          UserModal.findOne({userName: data.userName}, '-password', (err, fulfil) => {
+            if (err) {
+              rej(err)
+            }
+            
+            resData = fulfil
+            console.log(resData);
+            let response = {
+              msg: msg,
+              data: resData,
+              isExist: isExist
+            }
+            res(response);
+            
+          });
+        } else {
+          msg = '账号或密码错误，请重新输入';
+          res({msg:msg, data:{}, isExist: false});
+        }
+        
+        // let response = {
+        //   msg: msg,
+        //   data: resData,
+        //   isExist: isExist
+        // }
+        // res(response);
+
+      });
     })
   }
 
@@ -24,7 +68,6 @@ class SongsController {
         if (err) {
           rej(err)
         }
-        console.log('fulfil:', fulfil);
 
         fulfil.forEach(item => {
           if (item.userName == data.userName) {

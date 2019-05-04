@@ -13,8 +13,13 @@ router.post('/register', async (ctx, next) => {
   ctx.body = resData;
 })
 
-router.get('/bar', async (ctx, next) => {
-  ctx.body = 'this is a users/bar response';
+router.post('/login', async (ctx, next) => {
+  let reqData = ctx.request.body;
+  let resData = {};
+  if (reqData) {
+    resData = await UserCon.login(reqData);
+  }
+  ctx.body = resData;
 })
 
 module.exports = router
